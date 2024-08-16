@@ -1,4 +1,5 @@
 ﻿using ChillMusicUWP.Data.Context;
+using ChillMusicUWP.MVVM.ViewModel;
 using ChillMusicUWP.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -28,6 +29,8 @@ namespace ChillMusicUWP
         {
             IServiceCollection services = new ServiceCollection();
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Music.db"));
+
+            services.AddScoped<MainPageViewModel>();
 
             _serviceProvider = services.BuildServiceProvider();
             DbInitializerService.Seed(_serviceProvider);
@@ -73,6 +76,10 @@ namespace ChillMusicUWP
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Сохранить состояние приложения и остановить все фоновые операции
             deferral.Complete();
+        }
+        public static ServiceProvider GetServiceProvider()
+        {
+            return _serviceProvider;
         }
     }
 }

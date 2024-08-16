@@ -121,6 +121,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Context\ApplicationDbContext.cs" />
+    <Compile Include="Data\Repositories\IRepository.cs" />
+    <Compile Include="Data\Repositories\SongRepository.cs" />
     <Compile Include="MVVM\Model\Song.cs" />
     <Compile Include="MVVM\Model\Sound.cs" />
     <Compile Include="MVVM\Model\SoundCategory.cs" />

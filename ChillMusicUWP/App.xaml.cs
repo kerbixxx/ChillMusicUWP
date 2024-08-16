@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ChillMusicUWP.Data.Context;
+using ChillMusicUWP.Services;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,8 +23,15 @@ namespace ChillMusicUWP
 {
     sealed partial class App : Application
     {
+        private static ServiceProvider _serviceProvider;
         public App()
         {
+            IServiceCollection services = new ServiceCollection();
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Music.db"));
+
+            _serviceProvider = services.BuildServiceProvider();
+            DbInitializerService.Seed(_serviceProvider);
+
             this.InitializeComponent();
             this.Suspending += OnSuspending;
         }

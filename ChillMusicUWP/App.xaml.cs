@@ -1,4 +1,6 @@
 ﻿using ChillMusicUWP.Data.Context;
+using ChillMusicUWP.Data.Repositories;
+using ChillMusicUWP.MVVM.Model;
 using ChillMusicUWP.MVVM.ViewModel;
 using ChillMusicUWP.Services;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +33,7 @@ namespace ChillMusicUWP
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Music.db"));
 
             services.AddScoped<MainPageViewModel>();
+            services.AddScoped<IRepository<Song>, SongRepository>();
 
             _serviceProvider = services.BuildServiceProvider();
             DbInitializerService.Seed(_serviceProvider);

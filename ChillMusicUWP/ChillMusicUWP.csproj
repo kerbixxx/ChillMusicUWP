@@ -142,6 +142,22 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\background.jpg" />
+    <Content Include="Assets\Images\image1.jpg" />
+    <Content Include="Assets\Images\image10.jpg" />
+    <Content Include="Assets\Images\image11.jpg" />
+    <Content Include="Assets\Images\image12.jpg" />
+    <Content Include="Assets\Images\image13.jpg" />
+    <Content Include="Assets\Images\image14.jpg" />
+    <Content Include="Assets\Images\image15.jpg" />
+    <Content Include="Assets\Images\image2.jpg" />
+    <Content Include="Assets\Images\image3.jpg" />
+    <Content Include="Assets\Images\image4.jpg" />
+    <Content Include="Assets\Images\image5.jpg" />
+    <Content Include="Assets\Images\image6.jpg" />
+    <Content Include="Assets\Images\image7.jpg" />
+    <Content Include="Assets\Images\image8.jpg" />
+    <Content Include="Assets\Images\image9.jpg" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -173,7 +189,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Images\" />
     <Folder Include="Assets\Songs\" />
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>

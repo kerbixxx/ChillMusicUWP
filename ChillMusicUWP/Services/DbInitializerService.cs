@@ -36,34 +36,31 @@ namespace ChillMusicUWP.Services
 
         private static void SeedEntities(ApplicationDbContext db)
         {
-            var songs = SeedSongs(db);
-            var categories = SeedSoundCategories(db);
-            var sounds = SeedSounds(db);
+            SeedSongs(db);
+            SeedSoundCategories(db);
+            SeedSounds(db);
         }
 
-        private static List<Song> SeedSongs(ApplicationDbContext db)
+        private static void SeedSongs(ApplicationDbContext db)
         {
             if (db.Songs.Any())
             {
-                return db.Songs.ToList();
+                return;
             }
-            var songs = new List<Song>();
 
             int songsCount = 15;
             for (int i = 1; i < songsCount+1; i++)
             {
-                songs.Add(new Song() { Image = $"/Assets/Images/image{songsCount}.jpg", SongFile = $"/Assets/Songs/song{songsCount}.mp3" });
+                db.Songs.Add(new Song() { Image = $"/Assets/Images/image{i}.jpg", SongFile = $"/Assets/Songs/song{i}.mp3", Name = $"image{i}"});
             }
-            db.AddRange(songs);
             db.SaveChanges();
-            return songs;
         }
 
-        private static List<SoundCategory> SeedSoundCategories(ApplicationDbContext db)
+        private static void SeedSoundCategories(ApplicationDbContext db)
         {
             if (db.SoundCategories.Any())
             {
-                return db.SoundCategories.ToList();
+                return;
             }
             var soundCategories = new List<SoundCategory>();
 
@@ -74,14 +71,13 @@ namespace ChillMusicUWP.Services
 
             db.AddRange(soundCategories);
             db.SaveChanges();
-            return soundCategories;
         }
 
-        private static List<Sound> SeedSounds(ApplicationDbContext db)
+        private static void SeedSounds(ApplicationDbContext db)
         {
             if (db.Sounds.Any())
             {
-                return db.Sounds.ToList();
+                return;
             }
             var sounds = new List<Sound>();
             var soundCategories = db.SoundCategories.ToList();
@@ -90,13 +86,10 @@ namespace ChillMusicUWP.Services
             {
                 for(int i = 1; i < 10; i++)
                 {
-                    sounds.Add(new Sound() { Name = $"sound{sounds.Count+1}", SoundFile = $"/Assets/Sounds/sound{sounds.Count+1}.mp3", CategoryId=category.Id});
+                    db.Sounds.Add(new Sound() { Name = $"sound{sounds.Count+1}", SoundFile = $"/Assets/Sounds/sound{sounds.Count+1}.mp3", CategoryId=category.Id});
                 }
             }
-
-            db.AddRange(sounds);
             db.SaveChanges();
-            return sounds;
         }
     }
 }

@@ -37,7 +37,6 @@ namespace ChillMusicUWP
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-
                 }
 
                 Window.Current.Content = rootFrame;

@@ -13,5 +13,25 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
         </Grid.Background>
+        
+        <Button Content="🠔" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                Margin="30" Background="White" Command="{Binding NavigateToMainCommand}"/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+            <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
+
+            <Button Content="Добавить" HorizontalAlignment="Center" Background="White"/>
+
+            <ItemsControl>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="тт"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+        <Button Content="Пауза/Возобновление" HorizontalAlignment="Left" 
+                VerticalAlignment="Bottom" Margin="10" Background="White"
+                Command="{Binding PauseSongCommand}"/>
     </Grid>
 </Page>

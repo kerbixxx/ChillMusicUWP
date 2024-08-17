@@ -13,6 +13,5 @@
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
         </Grid.Background>
-        <Button Content="🠔" Margin="58,40,0,0" VerticalAlignment="Top" Command="{Binding NavigateToMainCommand}"/>
     </Grid>
 </Page>

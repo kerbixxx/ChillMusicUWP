@@ -39,6 +39,7 @@ namespace ChillMusicUWP.MVVM.View
             {
                 Song = selectedSong;
                 ViewModel.CurrentSong = Song;
+                ViewModel.PlaySong();
             }
             base.OnNavigatedTo(e);
         }

@@ -35,6 +35,7 @@ namespace ChillMusicUWP
             services.AddScoped<MainPageViewModel>();
             services.AddScoped<SongPageViewModel>();
             services.AddScoped<IRepository<Song>, SongRepository>();
+            services.AddScoped<IRepository<Sound>, SoundRepository>();
             services.AddScoped<PlaybackService>();
 
             _serviceProvider = services.BuildServiceProvider();

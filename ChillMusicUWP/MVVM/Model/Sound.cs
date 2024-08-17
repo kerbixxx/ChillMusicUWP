@@ -16,5 +16,6 @@ namespace ChillMusicUWP.MVVM.Model
         public string SoundFile { get; set; }
         [ForeignKey(nameof(SoundCategory))]
         public int CategoryId { get; set; }
+        public virtual SoundCategory? SoundCategory { get; set; }
     }
 }

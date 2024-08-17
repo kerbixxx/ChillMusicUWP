@@ -21,7 +21,6 @@
             <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
 
             <Button Content="Добавить" HorizontalAlignment="Center" Background="White"/>
-
             <ItemsControl>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>

@@ -1,5 +1,6 @@
 ﻿using ChillMusicUWP.Data.Repositories;
 using ChillMusicUWP.MVVM.Model;
+using ChillMusicUWP.MVVM.View;
 using ChillMusicUWP.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -8,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +49,12 @@ namespace ChillMusicUWP.MVVM.ViewModel
             if (IsPlaying) _playbackService.PausePlaying();
             else _playbackService.ResumePlaying();
             IsPlaying = !IsPlaying;
+        }
+
+        [RelayCommand]
+        void SetTimer()
+        {
+
         }
 
         public void PlaySong()

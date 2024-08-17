@@ -20,7 +20,8 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
             <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
 
-            <Button Content="Добавить" HorizontalAlignment="Center" Background="White"/>
+            <Button Content="Добавить" HorizontalAlignment="Center" 
+                    Background="White" Command="{Binding OpenSoundWindow}"/>
             <ItemsControl>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -30,7 +31,10 @@
             </ItemsControl>
         </StackPanel>
         <Button Content="Пауза/Возобновление" HorizontalAlignment="Left" 
-                VerticalAlignment="Bottom" Margin="10" Background="White"
-                Command="{Binding PauseSongCommand}"/>
+                VerticalAlignment="Bottom" Margin="50" Background="White"
+                Command="{Binding PauseSongCommand}"/>        
+        <Button Content="Таймер" HorizontalAlignment="Right" 
+                VerticalAlignment="Bottom" Margin="50" Background="White"
+                Command="{Binding SetTimerCommand}"/>
     </Grid>
 </Page>

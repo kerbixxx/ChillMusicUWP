@@ -1,4 +1,8 @@
-﻿using System;
+﻿using ChillMusicUWP.MVVM.Model;
+using ChillMusicUWP.MVVM.ViewModel;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,18 +17,29 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace ChillMusicUWP.MVVM.View
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class SongPage : Page
     {
+        public Song Song { get; set; }
+
         public SongPage()
         {
             this.InitializeComponent();
+            ServiceProvider serviceProvider = App.GetServiceProvider();
+
+            this.DataContext = serviceProvider.GetService<SongPageViewModel>();
+        }
+
+        public SongPageViewModel ViewModel => (SongPageViewModel)this.DataContext;
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            if (e.Parameter != null && e.Parameter is Song selectedSong)
+            {
+                Song = e.Parameter as Song;
+            }
+            base.OnNavigatedTo(e);
         }
     }
 }

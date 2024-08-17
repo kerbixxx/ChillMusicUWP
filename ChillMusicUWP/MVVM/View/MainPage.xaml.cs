@@ -1,4 +1,5 @@
-﻿using ChillMusicUWP.MVVM.ViewModel;
+﻿using ChillMusicUWP.MVVM.Model;
+using ChillMusicUWP.MVVM.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;

@@ -127,6 +127,7 @@
     <Compile Include="MVVM\Model\Sound.cs" />
     <Compile Include="MVVM\Model\SoundCategory.cs" />
     <Compile Include="MVVM\ViewModel\MainPageViewModel.cs" />
+    <Compile Include="MVVM\ViewModel\SongPageViewModel.cs" />
     <Compile Include="MVVM\View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +136,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DbInitializerService.cs" />
+    <Compile Include="Services\NavigationService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

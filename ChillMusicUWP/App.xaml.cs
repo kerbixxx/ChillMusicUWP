@@ -33,6 +33,7 @@ namespace ChillMusicUWP
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source = Music.db"));
 
             services.AddScoped<MainPageViewModel>();
+            services.AddScoped<SongPageViewModel>();
             services.AddScoped<IRepository<Song>, SongRepository>();
 
             _serviceProvider = services.BuildServiceProvider();
@@ -51,6 +52,8 @@ namespace ChillMusicUWP
                 rootFrame = new Frame();
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
+
+                NavigationService.SetRootFrame(rootFrame);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {

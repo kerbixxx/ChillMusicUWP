@@ -16,15 +16,13 @@ namespace ChillMusicUWP.Services
             _rootFrame = rootFrame;
         }
 
-        public static void NavigateToPageAsync(Type type, object parameter = null)
+        public static void NavigateToPage(Type type, object parameter = null)
         {
             if (_rootFrame == null)
             {
                 throw new InvalidOperationException("Root frame has not been set.");
             }
-
             _rootFrame.Navigate(type, parameter);
         }
     }
-
 }

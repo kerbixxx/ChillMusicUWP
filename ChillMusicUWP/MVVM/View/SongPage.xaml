@@ -5,10 +5,14 @@
     xmlns:local="using:ChillMusicUWP.MVVM.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:ChillMusicUWP.MVVM.ViewModel" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Grid>
-        <TextBox HorizontalAlignment="Left" Margin="644,348,0,0" TextWrapping="Wrap" Text="SongPage" VerticalAlignment="Top"/>
 
+    <Grid>
+        <Grid.Background>
+            <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
+        </Grid.Background>
+        <Button Content="🠔" Margin="58,40,0,0" VerticalAlignment="Top" Command="{Binding NavigateToMainCommand}"/>
     </Grid>
 </Page>

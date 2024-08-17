@@ -25,10 +25,10 @@ namespace ChillMusicUWP.MVVM.View
 
         public SongPage()
         {
-            this.InitializeComponent();
             ServiceProvider serviceProvider = App.GetServiceProvider();
 
             this.DataContext = serviceProvider.GetService<SongPageViewModel>();
+            this.InitializeComponent();
         }
 
         public SongPageViewModel ViewModel => (SongPageViewModel)this.DataContext;
@@ -37,7 +37,8 @@ namespace ChillMusicUWP.MVVM.View
         {
             if (e.Parameter != null && e.Parameter is Song selectedSong)
             {
-                Song = e.Parameter as Song;
+                Song = selectedSong;
+                ViewModel.CurrentSong = Song;
             }
             base.OnNavigatedTo(e);
         }

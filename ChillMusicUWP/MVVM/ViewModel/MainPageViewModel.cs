@@ -37,7 +37,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
         [RelayCommand]
         void OpenSong(Song song)
         {
-            NavigationService.NavigateToPageAsync(typeof(SongPage), song);
+            NavigationService.NavigateToPage(typeof(SongPage), song);
         }
     }
 }

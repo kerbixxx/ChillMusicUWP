@@ -160,6 +160,21 @@
     <Content Include="Assets\Images\image7.jpg" />
     <Content Include="Assets\Images\image8.jpg" />
     <Content Include="Assets\Images\image9.jpg" />
+    <Content Include="Assets\Songs\song1.mp3" />
+    <Content Include="Assets\Songs\song10.mp3" />
+    <Content Include="Assets\Songs\song11.mp3" />
+    <Content Include="Assets\Songs\song12.mp3" />
+    <Content Include="Assets\Songs\song13.mp3" />
+    <Content Include="Assets\Songs\song14.mp3" />
+    <Content Include="Assets\Songs\song15.mp3" />
+    <Content Include="Assets\Songs\song2.mp3" />
+    <Content Include="Assets\Songs\song3.mp3" />
+    <Content Include="Assets\Songs\song4.mp3" />
+    <Content Include="Assets\Songs\song5.mp3" />
+    <Content Include="Assets\Songs\song6.mp3" />
+    <Content Include="Assets\Songs\song7.mp3" />
+    <Content Include="Assets\Songs\song8.mp3" />
+    <Content Include="Assets\Songs\song9.mp3" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -191,7 +206,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Assets\Songs\" />
     <Folder Include="Assets\Sounds\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

@@ -16,29 +16,22 @@ namespace ChillMusicUWP.Services
     public class PlaybackService
     {
         private MediaPlayer _mediaPlayer;
-        private DispatcherTimer _timer;
         public PlaybackService()
         {
             _mediaPlayer = new();
-            _timer = new DispatcherTimer();
-            _timer.Interval = TimeSpan.FromSeconds(1);
-            _timer.Tick += Timer_Tick;
+            _mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
         }
 
         public void PlaySongAsync(Song song)
         {
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri($"ms-appx://{song.SongFile}"));
             _mediaPlayer.Play();
-            _timer.Start();
         }
-        private void Timer_Tick(object sender, object e)
+        private void MediaPlayer_MediaEnded(MediaPlayer sender, object e)
         {
-            if (_mediaPlayer.Position == _mediaPlayer.NaturalDuration)
-            {
-                _timer.Stop();
-                _mediaPlayer.Play();
-            }
+            _mediaPlayer.Play();
         }
+
         public void StopPlaying()
         {
             _mediaPlayer.Pause();

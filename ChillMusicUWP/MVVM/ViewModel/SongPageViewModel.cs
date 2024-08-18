@@ -12,6 +12,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace ChillMusicUWP.MVVM.ViewModel
 {
@@ -20,6 +21,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
         private readonly IRepository<Sound> _soundRepository;
         private readonly PlaybackService _playbackService;
         private bool IsPlaying = true;
+        private DispatcherTimer _timer;
         private ObservableCollection<Sound> Sounds { get; set; }
         public Song CurrentSong { get; set; }
         public SongPageViewModel(PlaybackService playbackService, IRepository<Sound> soundRepository)
@@ -52,9 +54,17 @@ namespace ChillMusicUWP.MVVM.ViewModel
         }
 
         [RelayCommand]
-        void SetTimer()
+        void SetTimer(string seconds)
         {
-
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(int.Parse(seconds)) };
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
+        }
+        private void Timer_Tick(object sender, object e)
+        {
+            _playbackService.StopPlaying();
+            _timer.Stop();
+            IsPlaying = false;
         }
 
         public void PlaySong()

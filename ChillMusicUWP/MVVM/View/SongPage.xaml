@@ -35,6 +35,6 @@
                 Command="{Binding PauseSongCommand}"/>        
         <Button Content="Таймер" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Margin="50" Background="White"
-                Command="{Binding SetTimerCommand}"/>
+                Command="{Binding SetTimerCommand}" CommandParameter="1"/>
     </Grid>
 </Page>

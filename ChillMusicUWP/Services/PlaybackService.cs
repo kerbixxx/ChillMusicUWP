@@ -22,7 +22,7 @@ namespace ChillMusicUWP.Services
             _mediaPlayer.MediaEnded += MediaPlayer_MediaEnded;
         }
 
-        public void PlaySongAsync(Song song)
+        public void PlaySong(Song song)
         {
             _mediaPlayer.Source = MediaSource.CreateFromUri(new Uri($"ms-appx://{song.SongFile}"));
             _mediaPlayer.Play();

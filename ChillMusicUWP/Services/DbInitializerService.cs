@@ -67,7 +67,6 @@ namespace ChillMusicUWP.Services
             soundCategories.Add(new SoundCategory() { Name = "Музыка" });
             soundCategories.Add(new SoundCategory() { Name = "Природа" });
             soundCategories.Add(new SoundCategory() { Name = "Животные" });
-            soundCategories.Add(new SoundCategory() { Name = "Бинауральные ритмы" });
 
             db.AddRange(soundCategories);
             db.SaveChanges();
@@ -79,14 +78,14 @@ namespace ChillMusicUWP.Services
             {
                 return;
             }
-            var sounds = new List<Sound>();
             var soundCategories = db.SoundCategories.ToList();
-
+            int i = 1;
             foreach (var category in soundCategories)
             {
-                for(int i = 1; i < 10; i++)
+                for(int j = 0; j < 3; j++)
                 {
-                    db.Sounds.Add(new Sound() { Name = $"sound{sounds.Count+1}", SoundFile = $"/Assets/Sounds/sound{sounds.Count+1}.mp3", CategoryId=category.Id});
+                    db.Sounds.Add(new Sound() { Name = $"sound{i}", SoundFile = $"/Assets/Sounds/sound{i}.mp3", CategoryId=category.Id});
+                    i++;
                 }
             }
             db.SaveChanges();

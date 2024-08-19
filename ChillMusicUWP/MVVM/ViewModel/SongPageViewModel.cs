@@ -37,7 +37,6 @@ namespace ChillMusicUWP.MVVM.ViewModel
             var soundsFromDb = _soundRepository.GetAllAsync().GetAwaiter().GetResult();
             Sounds = new ObservableCollection<Sound>(soundsFromDb);
         }
-
         [RelayCommand]
         void NavigateToMain()
         {
@@ -62,14 +61,14 @@ namespace ChillMusicUWP.MVVM.ViewModel
         }
         private void Timer_Tick(object sender, object e)
         {
-            _playbackService.StopPlaying();
+            _playbackService.PausePlaying();
             _timer.Stop();
             IsPlaying = false;
         }
 
         public void PlaySong()
         {
-            _playbackService.PlaySongAsync(CurrentSong);
+            _playbackService.PlaySong(CurrentSong);
         }
     }
 }

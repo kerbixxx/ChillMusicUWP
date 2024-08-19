@@ -8,7 +8,11 @@
     xmlns:viewModel="using:ChillMusicUWP.MVVM.ViewModel" 
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Page.Resources>
+        <ResourceDictionary>
+            <local:SoundControl x:Key="SoundControlInstance"/>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
@@ -21,7 +25,8 @@
             <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
 
             <Button Content="Добавить" HorizontalAlignment="Center" 
-                    Background="White" Command="{Binding OpenSoundWindow}"/>
+                    Background="White" Command="{Binding OpenSoundWindowCommand}"
+                    CommandParameter="{StaticResource SoundControlInstance}"/>
             <ItemsControl>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -29,6 +34,9 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+        </StackPanel>
+        <StackPanel x:Name="SoundControlContainer" Visibility="Collapsed">
+            <ContentControl Content="{Binding SoundControl}" />
         </StackPanel>
         <Button Content="Пауза/Возобновление" HorizontalAlignment="Left" 
                 VerticalAlignment="Bottom" Margin="50" Background="White"

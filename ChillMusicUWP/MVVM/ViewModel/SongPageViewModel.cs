@@ -1,4 +1,5 @@
 ﻿using ChillMusicUWP.Data.Repositories;
+using ChillMusicUWP.Interfaces;
 using ChillMusicUWP.MVVM.Model;
 using ChillMusicUWP.MVVM.View;
 using ChillMusicUWP.Services;
@@ -19,12 +20,12 @@ namespace ChillMusicUWP.MVVM.ViewModel
     public partial class SongPageViewModel : ObservableObject
     {
         private readonly IRepository<Sound> _soundRepository;
-        private readonly PlaybackService _playbackService;
+        private readonly IPlaybackService _playbackService;
         private bool IsPlaying = true;
         private DispatcherTimer _timer;
         private ObservableCollection<Sound> Sounds { get; set; }
         public Song CurrentSong { get; set; }
-        public SongPageViewModel(PlaybackService playbackService, IRepository<Sound> soundRepository)
+        public SongPageViewModel(IRepository<Sound> soundRepository, IPlaybackService playbackService)
         {
             _playbackService = playbackService;
             _soundRepository = soundRepository;

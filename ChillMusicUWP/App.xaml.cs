@@ -1,5 +1,6 @@
 ﻿using ChillMusicUWP.Data.Context;
 using ChillMusicUWP.Data.Repositories;
+using ChillMusicUWP.Interfaces;
 using ChillMusicUWP.MVVM.Model;
 using ChillMusicUWP.MVVM.ViewModel;
 using ChillMusicUWP.Services;
@@ -36,7 +37,7 @@ namespace ChillMusicUWP
             services.AddScoped<SongPageViewModel>();
             services.AddScoped<IRepository<Song>, SongRepository>();
             services.AddScoped<IRepository<Sound>, SoundRepository>();
-            services.AddScoped<PlaybackService>();
+            services.AddScoped<IPlaybackService,PlaybackService>();
 
             _serviceProvider = services.BuildServiceProvider();
             DbInitializerService.Seed(_serviceProvider);

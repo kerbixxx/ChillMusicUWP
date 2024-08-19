@@ -124,6 +124,7 @@
     <Compile Include="Data\Repositories\IRepository.cs" />
     <Compile Include="Data\Repositories\SongRepository.cs" />
     <Compile Include="Data\Repositories\SoundRepository.cs" />
+    <Compile Include="Interfaces\IPlaybackService.cs" />
     <Compile Include="MVVM\Model\Song.cs" />
     <Compile Include="MVVM\Model\Sound.cs" />
     <Compile Include="MVVM\Model\SoundCategory.cs" />

@@ -1,5 +1,7 @@
 ﻿using ChillMusicUWP.MVVM.Model;
+using ChillMusicUWP.MVVM.View;
 using ChillMusicUWP.MVVM.ViewModel;
+using ChillMusicUWP.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -32,5 +34,12 @@ namespace ChillMusicUWP
         }
 
         public MainPageViewModel ViewModel => (MainPageViewModel)this.DataContext;
+
+        private void OnGridTapped(object sender, TappedRoutedEventArgs e)
+        {
+            var tappedElement = (FrameworkElement)sender;
+            var song = (Song)tappedElement.DataContext;
+            NavigationService.NavigateToPage(typeof(SongPage), song);
+        }
     }
 }

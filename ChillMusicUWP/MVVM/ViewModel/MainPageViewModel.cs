@@ -33,11 +33,5 @@ namespace ChillMusicUWP.MVVM.ViewModel
             var songsFromDb = _songRepository.GetAllAsync().Result;
             Songs = new ObservableCollection<Song>(songsFromDb);
         }
-
-        [RelayCommand]
-        void OpenSong(Song song)
-        {
-            NavigationService.NavigateToPage(typeof(SongPage), song);
-        }
     }
 }

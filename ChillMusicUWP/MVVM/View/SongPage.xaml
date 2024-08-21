@@ -25,8 +25,14 @@
             <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
 
             <Button Content="Добавить" HorizontalAlignment="Center" 
-                    Background="White" Command="{Binding OpenSoundWindowCommand}"
-                    CommandParameter="{StaticResource SoundControlInstance}"/>
+        Background="White" Command="{Binding OpenPopupCommand}"/>
+
+            <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}"  Width="400" Height="300">
+                <Border Background="White">
+                    <local:SoundControl ItemsSource="{Binding Sounds}" DataContext="{Binding}" />
+                </Border>
+            </Popup>
+
             <ItemsControl>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
@@ -40,7 +46,7 @@
         </StackPanel>
         <Button Content="Пауза/Возобновление" HorizontalAlignment="Left" 
                 VerticalAlignment="Bottom" Margin="50" Background="White"
-                Command="{Binding PauseSongCommand}"/>        
+                Command="{Binding PauseAudioCommand}"/>        
         <Button Content="Таймер" HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" Margin="50" Background="White"
                 Command="{Binding SetTimerCommand}" CommandParameter="1"/>

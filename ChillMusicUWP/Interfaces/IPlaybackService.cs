@@ -10,9 +10,10 @@ namespace ChillMusicUWP.Interfaces
     public interface IPlaybackService
     {
         void PlaySong(Song song);
-        void StopPlaying();
+        void StopPlaying(string name);
         void PausePlaying();
         void ResumePlaying();
         void AddEffect(Sound sound);
+        void StopPlayer();
     }
 }

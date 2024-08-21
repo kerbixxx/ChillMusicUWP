@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ChillMusicUWP.MVVM.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,6 +23,15 @@ namespace ChillMusicUWP.MVVM.View
         public SoundControl()
         {
             this.InitializeComponent();
+        }
+
+        public static readonly DependencyProperty ItemsSourceProperty =
+        DependencyProperty.Register("ItemsSource", typeof(IEnumerable<Sound>), typeof(SoundControl), new PropertyMetadata(null));
+
+        public IEnumerable<Sound> ItemsSource
+        {
+            get => (IEnumerable<Sound>)GetValue(ItemsSourceProperty);
+            set => SetValue(ItemsSourceProperty, value);
         }
     }
 }

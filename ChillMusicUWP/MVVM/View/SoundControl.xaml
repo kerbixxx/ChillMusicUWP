@@ -10,6 +10,12 @@
     d:DesignWidth="400">
 
     <Grid Background="White">
-        <Button Content="Click Me" HorizontalAlignment="Center"/>
+        <ItemsControl ItemsSource="{Binding}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Button Content="{Binding Name}" Command="{Binding AddEffectCommand}" CommandParameter="{Binding}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </Grid>
 </UserControl>

@@ -26,7 +26,7 @@ namespace ChillMusicUWP.MVVM.View
         }
 
         public static readonly DependencyProperty ItemsSourceProperty =
-        DependencyProperty.Register("ItemsSource", typeof(IEnumerable<Sound>), typeof(SoundControl), new PropertyMetadata(null));
+        DependencyProperty.Register("ItemsSource", typeof(IEnumerable<Sound>), typeof(UserControl), new PropertyMetadata(null));
 
         public IEnumerable<Sound> ItemsSource
         {

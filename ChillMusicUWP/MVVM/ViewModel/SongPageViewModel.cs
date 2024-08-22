@@ -24,11 +24,13 @@ namespace ChillMusicUWP.MVVM.ViewModel
         private readonly IPlaybackService _playbackService;
         private bool IsPlaying = true;
         private DispatcherTimer _timer;
+        private int _remainingSeconds;
         private ObservableCollection<Sound> Sounds { get; set; }
         private ObservableCollection<Sound> SelectedSounds { get; set; }
         public Song CurrentSong { get; set; }
         public SongPageViewModel(IRepository<Sound> soundRepository, IPlaybackService playbackService)
         {
+            ButtonContent = "Таймер";
             _playbackService = playbackService;
             _soundRepository = soundRepository;
 
@@ -43,6 +45,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
         [RelayCommand]
         void NavigateToMain()
         {
+            IsPopupOpen = false;
             _playbackService.StopPlayer();
             NavigationService.NavigateToPage(typeof(MainPage));
         }
@@ -55,32 +58,57 @@ namespace ChillMusicUWP.MVVM.ViewModel
             IsPlaying = !IsPlaying;
         }
 
+        #region Таймер
+        [RelayCommand]
+        void OpenTimerPopup()
+        {
+            IsPopupTimerOpen = true;
+        }
+        [RelayCommand]
+        void CloseTimerPopup()
+        {
+            IsPopupTimerOpen = false;
+        }
         [RelayCommand]
         void SetTimer(string seconds)
         {
-            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(int.Parse(seconds)) };
+            _remainingSeconds = int.Parse(seconds);
+            UpdateDisplay();
+            _timer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _timer.Tick += Timer_Tick;
             _timer.Start();
+            IsPopupTimerOpen = false;
         }
+        private void Timer_Tick(object sender, object e)
+        {
+            _remainingSeconds--;
+            UpdateDisplay();
+            if (_remainingSeconds <= 0)
+            {
+                _playbackService.PausePlaying();
+                _timer.Stop();
+                IsPlaying = false;
+                ButtonContent = "Таймер";
+            }
+        }
+
+        private void UpdateDisplay()
+        {
+            ButtonContent = $"{_remainingSeconds} секунд";
+        }
+
+        private string _buttonContent;
+        public string ButtonContent
+        {
+            get => _buttonContent;
+            set => SetProperty(ref _buttonContent, value);
+        }
+        #endregion
 
         [RelayCommand]
         void AddEffect(Sound sound)
         {
             _playbackService.AddEffect(sound);
-        }
-
-        [RelayCommand]
-        void StartRandomSounds()
-        {
-            _playbackService.AddEffect(Sounds[2]);
-            _playbackService.AddEffect(Sounds[4]);
-        }
-
-        private void Timer_Tick(object sender, object e)
-        {
-            _playbackService.PausePlaying();
-            _timer.Stop();
-            IsPlaying = false;
         }
 
         public void PlaySong()
@@ -97,7 +125,19 @@ namespace ChillMusicUWP.MVVM.ViewModel
         [RelayCommand]
         void OpenPopup()
         {
-            IsPopupOpen = true;
+            if(!IsPopupOpen) IsPopupOpen = true;
+        }
+        private bool _isPopupTimerOpen;
+        public bool IsPopupTimerOpen
+        {
+            get => _isPopupTimerOpen;
+            set => SetProperty(ref _isPopupTimerOpen, value);
+        }
+
+        [RelayCommand]
+        void Test()
+        {
+            Console.WriteLine("heh");
         }
     }
 }

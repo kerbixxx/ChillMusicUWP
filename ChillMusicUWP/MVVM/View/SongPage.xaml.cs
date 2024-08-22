@@ -28,7 +28,6 @@ namespace ChillMusicUWP.MVVM.View
             ServiceProvider serviceProvider = App.GetServiceProvider();
 
             this.DataContext = serviceProvider.GetService<SongPageViewModel>();
-            this.InitializeComponent();
         }
 
         public SongPageViewModel ViewModel => (SongPageViewModel)this.DataContext;
@@ -42,6 +41,7 @@ namespace ChillMusicUWP.MVVM.View
                 ViewModel.PlaySong();
             }
             base.OnNavigatedTo(e);
+            this.InitializeComponent();
         }
     }
 }

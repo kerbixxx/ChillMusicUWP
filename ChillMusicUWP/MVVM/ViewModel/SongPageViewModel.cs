@@ -22,7 +22,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
     {
         private readonly IRepository<Sound> _soundRepository;
         private readonly IPlaybackService _playbackService;
-        private bool IsPlaying = true;
+
         private DispatcherTimer _timer;
         private int _remainingSeconds;
         private ObservableCollection<Sound> Sounds { get; set; }
@@ -50,11 +50,17 @@ namespace ChillMusicUWP.MVVM.ViewModel
             NavigationService.NavigateToPage(typeof(MainPage));
         }
 
-        [RelayCommand]
-        void PauseAudio()
+        public void PauseAudio()
         {
-            if (IsPlaying) _playbackService.PausePlaying();
-            else _playbackService.ResumePlaying();
+            if (IsPlaying)
+            {
+                _playbackService.PausePlaying();
+                
+            }
+            else
+            {
+                _playbackService.ResumePlaying();
+            }
             IsPlaying = !IsPlaying;
         }
 
@@ -78,6 +84,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
             _timer.Tick += Timer_Tick;
             _timer.Start();
             IsPopupTimerOpen = false;
+            CanClickTimerButton = false;
         }
         private void Timer_Tick(object sender, object e)
         {
@@ -89,19 +96,13 @@ namespace ChillMusicUWP.MVVM.ViewModel
                 _timer.Stop();
                 IsPlaying = false;
                 ButtonContent = "Таймер";
+                CanClickTimerButton = true;
             }
         }
 
         private void UpdateDisplay()
         {
             ButtonContent = $"{_remainingSeconds} секунд";
-        }
-
-        private string _buttonContent;
-        public string ButtonContent
-        {
-            get => _buttonContent;
-            set => SetProperty(ref _buttonContent, value);
         }
         #endregion
 
@@ -116,12 +117,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
             _playbackService.PlaySong(CurrentSong);
         }
 
-        private bool _isPopupOpen;
-        public bool IsPopupOpen
-        {
-            get => _isPopupOpen;
-            set => SetProperty(ref _isPopupOpen, value);
-        }
+
         [RelayCommand]
         void OpenPopup()
         {
@@ -134,10 +130,34 @@ namespace ChillMusicUWP.MVVM.ViewModel
             set => SetProperty(ref _isPopupTimerOpen, value);
         }
 
-        [RelayCommand]
-        void Test()
+        #region Variables
+        private bool _canClickTimerButton = true;
+        public bool CanClickTimerButton
         {
-            Console.WriteLine("heh");
+            get => _canClickTimerButton;
+            set => SetProperty(ref _canClickTimerButton, value);
         }
+
+        private string _buttonContent;
+        public string ButtonContent
+        {
+            get => _buttonContent;
+            set => SetProperty(ref _buttonContent, value);
+        }
+
+        private bool _isPopupOpen;
+        public bool IsPopupOpen
+        {
+            get => _isPopupOpen;
+            set => SetProperty(ref _isPopupOpen, value);
+        }
+
+        private bool _isPlaying = true;
+        public bool IsPlaying
+        {
+            get => _isPlaying;
+            set => SetProperty(ref _isPlaying, value);
+        }
+        #endregion
     }
 }

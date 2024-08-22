@@ -2,22 +2,16 @@
     x:Class="ChillMusicUWP.MVVM.View.SongPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ChillMusicUWP.MVVM.View"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:viewModel="using:ChillMusicUWP.MVVM.ViewModel" 
+    xmlns:viewModel="using:ChillMusicUWP.MVVM.ViewModel"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <ResourceDictionary>
-            <local:SoundControl x:Key="SoundControlInstance"/>
-        </ResourceDictionary>
-    </Page.Resources>
     <Grid>
         <Grid.Background>
             <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
         </Grid.Background>
-        
+
         <Button Content="🠔" HorizontalAlignment="Left" VerticalAlignment="Top" 
                 Margin="30" Background="White" Command="{Binding NavigateToMainCommand}"/>
 
@@ -26,7 +20,7 @@
 
             <Button Content="Добавить" HorizontalAlignment="Center" 
         Background="White" Command="{Binding OpenPopupCommand}"/>
-
+            
             <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" Width="400" Height="300">
                 <StackPanel Background="White">
                     <TextBlock>This is popup text</TextBlock>
@@ -34,13 +28,15 @@
                 </StackPanel>
             </Popup>
         </StackPanel>
-        <Button Name="PlayButton" Content="Пауза/Возобновление" HorizontalAlignment="Left" 
-                VerticalAlignment="Bottom" Margin="50" Background="White"
-                Command="{Binding PauseAudioCommand}"/>
-        <Button Name="TimerButton" Content="{Binding ButtonContent}" HorizontalAlignment="Right" 
-                VerticalAlignment="Bottom" Margin="50" Background="White"
-                Command="{Binding OpenTimerPopupCommand}" CommandParameter="1">
-        </Button>
+
+        <Image x:Name="PlayPauseButton" Source="{Binding IsPlaying, Converter={StaticResource BoolToImageConverter}}" 
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="128,0,0,98" 
+               Width="164" Height="164" Tapped="PlayPauseButton_Tapped"/>
+        <Button Name="TimerButton" Content="{Binding ButtonContent}" HorizontalAlignment="Right"
+                VerticalAlignment="Bottom" Margin="50" Background="White" AllowFocusWhenDisabled="True"
+                Command="{Binding OpenTimerPopupCommand}" CommandParameter="1" IsEnabled="{Binding CanClickTimerButton}"/>
+
+        <TextBlock Name="TimerText" Visibility="Collapsed" Text="{Binding ButtonContent}" />
         <Popup x:Name="TimerPopup" IsOpen="{Binding IsPopupTimerOpen, Mode=TwoWay}" Width="400" Height="300">
             <StackPanel Background="White">
                 <TextBlock>This is popup text</TextBlock>

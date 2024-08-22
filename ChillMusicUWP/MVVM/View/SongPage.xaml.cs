@@ -43,5 +43,11 @@ namespace ChillMusicUWP.MVVM.View
             base.OnNavigatedTo(e);
             this.InitializeComponent();
         }
+
+        private void PlayPauseButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.PauseAudio();
+        }
+
     }
 }

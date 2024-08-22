@@ -120,6 +120,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\BooleanToImageConverter.cs" />
     <Compile Include="Data\Context\ApplicationDbContext.cs" />
     <Compile Include="Data\Repositories\IRepository.cs" />
     <Compile Include="Data\Repositories\SongRepository.cs" />
@@ -167,6 +168,8 @@
     <Content Include="Assets\Images\image8.jpg" />
     <Content Include="Assets\Images\image9.jpg" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\PauseIcon.png" />
+    <Content Include="Assets\PlayIcon.png" />
     <Content Include="Assets\Songs\song1.mp3" />
     <Content Include="Assets\Songs\song10.mp3" />
     <Content Include="Assets\Songs\song11.mp3" />

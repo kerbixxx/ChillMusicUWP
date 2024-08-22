@@ -151,6 +151,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\ArrowBack.png" />
     <Content Include="Assets\background.jpg" />
     <Content Include="Assets\Images\image1.jpg" />
     <Content Include="Assets\Images\image10.jpg" />
@@ -199,6 +200,7 @@
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\TimerIcon.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Properties\Default.rd.xml" />
   </ItemGroup>

@@ -49,5 +49,14 @@ namespace ChillMusicUWP.MVVM.View
             ViewModel.PauseAudio();
         }
 
+        private void BackButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.NavigateToMain();
+        }
+
+        private void TimerButton_Tapped(object sender, TappedRoutedEventArgs e)
+        {
+            ViewModel.OpenTimerPopup();
+        }
     }
 }

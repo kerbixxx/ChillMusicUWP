@@ -12,16 +12,16 @@
             <ImageBrush Stretch="Fill" ImageSource="{x:Bind ViewModel.CurrentSong.Image}"/>
         </Grid.Background>
 
-        <Button Content="🠔" HorizontalAlignment="Left" VerticalAlignment="Top" 
-                Margin="30" Background="White" Command="{Binding NavigateToMainCommand}"/>
+        <Image x:Name="BackButton" Source="/Assets/ArrowBack.png" Tapped="BackButton_Tapped" 
+               HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" Height="66" Width="64"/>
 
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
             <TextBlock Text="{x:Bind ViewModel.CurrentSong.Name}" TextAlignment="Center" IsColorFontEnabled="True"/>
 
             <Button Content="Добавить" HorizontalAlignment="Center" 
-        Background="White" Command="{Binding OpenPopupCommand}"/>
-            
-            <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" Width="400" Height="300">
+                    Background="White" Command="{Binding OpenPopupCommand}"/>
+
+            <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" Width="1022" Height="805">
                 <StackPanel Background="White">
                     <TextBlock>This is popup text</TextBlock>
                     <Button Content="Button in popup" Command="{Binding TestCommand}"/>
@@ -30,15 +30,16 @@
         </StackPanel>
 
         <Image x:Name="PlayPauseButton" Source="{Binding IsPlaying, Converter={StaticResource BoolToImageConverter}}" 
-               HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="128,0,0,98" 
-               Width="164" Height="164" Tapped="PlayPauseButton_Tapped"/>
-        <Button Name="TimerButton" Content="{Binding ButtonContent}" HorizontalAlignment="Right"
-                VerticalAlignment="Bottom" Margin="50" Background="White" AllowFocusWhenDisabled="True"
-                Command="{Binding OpenTimerPopupCommand}" CommandParameter="1" IsEnabled="{Binding CanClickTimerButton}"/>
+               HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="438,0,0,106" 
+               Width="148" Height="147" Tapped="PlayPauseButton_Tapped"/>
+
+        <Image x:Name="TimerButton" Source="/Assets/TimerIcon.png" Tapped="TimerButton_Tapped"
+               HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+               Margin="0,0,310,115" Height="130" Width="129"/>
 
         <TextBlock Name="TimerText" Visibility="Collapsed" Text="{Binding ButtonContent}" />
-        <Popup x:Name="TimerPopup" IsOpen="{Binding IsPopupTimerOpen, Mode=TwoWay}" Width="400" Height="300">
-            <StackPanel Background="White">
+        <Popup x:Name="TimerPopup" IsOpen="{Binding IsPopupTimerOpen, Mode=TwoWay}" Width="700" Height="900">
+            <Grid Background="LightGray">
                 <TextBlock>This is popup text</TextBlock>
                 <Button Content="1 секунда" Command="{Binding SetTimerCommand}" CommandParameter="1"/>
                 <Button Content="5 секунд" Command="{Binding SetTimerCommand}" CommandParameter="5"/>
@@ -49,7 +50,7 @@
                 <Button Content="5 минут" Command="{Binding SetTimerCommand}" CommandParameter="300"/>
                 <Button Content="10 минут" Command="{Binding SetTimerCommand}" CommandParameter="600"/>
                 <Button Content="Закрыть" Command="{Binding CloseTimerPopupCommand}"/>
-            </StackPanel>
+            </Grid>
         </Popup>
     </Grid>
 </Page>

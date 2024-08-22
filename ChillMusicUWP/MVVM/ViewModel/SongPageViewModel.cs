@@ -42,8 +42,7 @@ namespace ChillMusicUWP.MVVM.ViewModel
             Sounds = new ObservableCollection<Sound>(_soundRepository.GetAllAsync().GetAwaiter().GetResult());
         }
 
-        [RelayCommand]
-        void NavigateToMain()
+        public void NavigateToMain()
         {
             IsPopupOpen = false;
             _playbackService.StopPlayer();
@@ -64,12 +63,11 @@ namespace ChillMusicUWP.MVVM.ViewModel
             IsPlaying = !IsPlaying;
         }
 
-        #region Таймер
-        [RelayCommand]
-        void OpenTimerPopup()
+        public void OpenTimerPopup()
         {
             IsPopupTimerOpen = true;
         }
+        #region Таймер
         [RelayCommand]
         void CloseTimerPopup()
         {

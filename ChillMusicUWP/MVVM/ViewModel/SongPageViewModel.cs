@@ -1,19 +1,13 @@
 ﻿using ChillMusicUWP.Data.Repositories;
 using ChillMusicUWP.Interfaces;
 using ChillMusicUWP.MVVM.Model;
-using ChillMusicUWP.MVVM.View;
 using ChillMusicUWP.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Media.Core;
 using Windows.UI.Xaml;
 
 namespace ChillMusicUWP.MVVM.ViewModel
@@ -22,11 +16,10 @@ namespace ChillMusicUWP.MVVM.ViewModel
     {
         private readonly IRepository<Sound> _soundRepository;
         private readonly IPlaybackService _playbackService;
-
         private DispatcherTimer _timer;
         private int _remainingSeconds;
-        private ObservableCollection<Sound> Sounds { get; set; }
-        private ObservableCollection<Sound> SelectedSounds { get; set; }
+        public Dictionary<string, List<Sound>> GroupedSounds { get; private set; } = new();
+        public ObservableCollection<Sound> SelectedSounds { get; set; } = new();
         public Song CurrentSong { get; set; }
         public SongPageViewModel(IRepository<Sound> soundRepository, IPlaybackService playbackService)
         {
@@ -39,33 +32,46 @@ namespace ChillMusicUWP.MVVM.ViewModel
 
         private void InitializeSounds()
         {
-            Sounds = new ObservableCollection<Sound>(_soundRepository.GetAllAsync().GetAwaiter().GetResult());
+            var sounds = _soundRepository.GetAllAsync().GetAwaiter().GetResult();
+
+            var orderedGroups = from sound in sounds
+                                group sound by sound.SoundCategory.Name into newGroup
+                                orderby newGroup.Key
+                                select newGroup;
+
+            foreach (var group in orderedGroups)
+            {
+                if (!GroupedSounds.ContainsKey(group.Key))
+                {
+                    GroupedSounds[group.Key] = new List<Sound>();
+                }
+                foreach (var sound in group)
+                {
+                    GroupedSounds[group.Key].Add(sound);
+                }
+            }
         }
 
         public void NavigateToMain()
         {
+            IsPopupTimerOpen = false;
             IsPopupOpen = false;
+            IsPlaying = false;
             _playbackService.StopPlayer();
             NavigationService.NavigateToPage(typeof(MainPage));
+            SelectedSounds = new();
         }
 
         public void PauseAudio()
         {
-            if (IsPlaying)
-            {
-                _playbackService.PausePlaying();
-                
-            }
-            else
-            {
-                _playbackService.ResumePlaying();
-            }
+            if (IsPlaying) _playbackService.PausePlaying();
+            else _playbackService.ResumePlaying();
             IsPlaying = !IsPlaying;
         }
 
         public void OpenTimerPopup()
         {
-            IsPopupTimerOpen = true;
+            if(!IsPopupTimerOpen && CanClickTimerButton) IsPopupTimerOpen = true;
         }
         #region Таймер
         [RelayCommand]
@@ -108,6 +114,8 @@ namespace ChillMusicUWP.MVVM.ViewModel
         void AddEffect(Sound sound)
         {
             _playbackService.AddEffect(sound);
+            SelectedSounds.Add(sound);
+            IsPopupOpen = false;
         }
 
         public void PlaySong()
@@ -115,12 +123,13 @@ namespace ChillMusicUWP.MVVM.ViewModel
             _playbackService.PlaySong(CurrentSong);
         }
 
-
         [RelayCommand]
         void OpenPopup()
         {
             if(!IsPopupOpen) IsPopupOpen = true;
         }
+
+        #region Variables
         private bool _isPopupTimerOpen;
         public bool IsPopupTimerOpen
         {
@@ -128,7 +137,6 @@ namespace ChillMusicUWP.MVVM.ViewModel
             set => SetProperty(ref _isPopupTimerOpen, value);
         }
 
-        #region Variables
         private bool _canClickTimerButton = true;
         public bool CanClickTimerButton
         {

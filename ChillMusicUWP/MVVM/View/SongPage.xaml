@@ -26,7 +26,9 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Button Content="{Binding Name}" Margin="0,0,5,0"></Button>
+                            <Button Content="{Binding Name}" Margin="0,0,5,0" Background="White"
+                                    Command="{Binding DataContext.RemoveEffectCommand, ElementName=SelectedSoundsControl}"
+                                    CommandParameter="{Binding}"></Button>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>

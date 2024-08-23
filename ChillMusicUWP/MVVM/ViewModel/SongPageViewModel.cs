@@ -118,6 +118,12 @@ namespace ChillMusicUWP.MVVM.ViewModel
             IsPopupOpen = false;
         }
 
+        [RelayCommand]
+        void RemoveEffect(Sound sound)
+        {
+            _playbackService.StopPlaying(sound.Name);
+            SelectedSounds.Remove(sound);
+        }
         public void PlaySong()
         {
             _playbackService.PlaySong(CurrentSong);

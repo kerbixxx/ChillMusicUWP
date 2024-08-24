@@ -11,7 +11,6 @@ namespace ChillMusicUWP.Services
     {
         private Dictionary<string, MediaPlayer> _players = new Dictionary<string, MediaPlayer>();
 
-
         public void PlaySong(Song song)
         {
             if (!_players.ContainsKey(song.Name))

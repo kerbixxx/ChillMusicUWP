@@ -35,26 +35,6 @@
                 <Button Content="Добавить" HorizontalAlignment="Center" 
                 Background="White" Command="{Binding OpenPopupCommand}"/>
             </StackPanel>
-            <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}" Height="Auto" Width="Auto">
-                <StackPanel Background="White">
-                    <ItemsControl Name="SoundControl" ItemsSource="{Binding GroupedSounds}">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock FontWeight="Bold" FontSize="18" Text="{Binding Key}" />
-                                    <ItemsControl ItemsSource="{Binding Value}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Button Content="{Binding Name}" Command="{Binding DataContext.AddEffectCommand, ElementName=SoundControl}" CommandParameter="{Binding}"></Button>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </Popup>
         </StackPanel>
 
         <Image x:Name="PlayPauseButton" Source="{Binding IsPlaying, Converter={StaticResource BoolToImageConverter}}" 
@@ -67,6 +47,29 @@
 
         <TextBlock Name="TimerText" Visibility="Collapsed" Text="{Binding ButtonContent}" />
         <RelativePanel Margin="256,50,256,106">
+            <Popup x:Name="SoundsPopup" IsOpen="{Binding IsPopupOpen, Mode=TwoWay}"
+                          VerticalAlignment="Center" HorizontalAlignment="Center" 
+                          Style="{StaticResource PopupStyle}">
+                <StackPanel Background="White" VerticalAlignment="Stretch">
+                    <ItemsControl Name="GroupedSoundsControl" ItemsSource="{Binding GroupedSounds}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Margin="20">
+                                    <TextBlock Text="{Binding Key}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>
+                                    <ItemsControl ItemsSource="{Binding Value}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" Margin="0,5,0,0" HorizontalAlignment="Center"
+                                                           Tag="{Binding}" Tapped="SoundTextBlock_Tapped"/>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Popup>
             <Popup x:Name="TimerPopup" IsOpen="{Binding IsPopupTimerOpen, Mode=TwoWay}" 
                    RelativePanel.AlignHorizontalCenterWithPanel="True">
                 <StackPanel Background="White">
@@ -83,5 +86,6 @@
                 </StackPanel>
             </Popup>
         </RelativePanel>
+        <Image HorizontalAlignment="Left" Height="100" Margin="944,835,0,0" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Page>

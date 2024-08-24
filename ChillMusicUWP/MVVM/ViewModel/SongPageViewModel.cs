@@ -111,11 +111,14 @@ namespace ChillMusicUWP.MVVM.ViewModel
         #endregion
 
         [RelayCommand]
-        void AddEffect(Sound sound)
+        public void AddEffect(Sound sound)
         {
-            _playbackService.AddEffect(sound);
-            SelectedSounds.Add(sound);
-            IsPopupOpen = false;
+            if (!SelectedSounds.Contains(sound))
+            {
+                _playbackService.AddEffect(sound);
+                SelectedSounds.Add(sound);
+                IsPopupOpen = false;
+            }
         }
 
         [RelayCommand]
@@ -124,15 +127,18 @@ namespace ChillMusicUWP.MVVM.ViewModel
             _playbackService.StopPlaying(sound.Name);
             SelectedSounds.Remove(sound);
         }
+
         public void PlaySong()
         {
             _playbackService.PlaySong(CurrentSong);
+            IsPlaying = true;
         }
 
         [RelayCommand]
         void OpenPopup()
         {
             if(!IsPopupOpen) IsPopupOpen = true;
+            else IsPopupOpen = false;
         }
 
         #region Variables

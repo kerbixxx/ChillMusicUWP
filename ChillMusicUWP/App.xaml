@@ -8,6 +8,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <converters:BooleanToImageConverter x:Key="BoolToImageConverter"></converters:BooleanToImageConverter>
+            <Style TargetType="Popup" x:Key="PopupStyle">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="0"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

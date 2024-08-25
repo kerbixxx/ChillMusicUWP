@@ -15,5 +15,6 @@ namespace ChillMusicUWP.Interfaces
         void ResumePlaying();
         void AddEffect(Sound sound);
         void StopPlayer();
+        void SetVolume(string name, double volume);
     }
 }

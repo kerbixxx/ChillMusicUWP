@@ -28,6 +28,7 @@ namespace ChillMusicUWP.MVVM.View
 
         public SongPage()
         {
+            this.InitializeComponent();
             ServiceProvider serviceProvider = App.GetServiceProvider();
 
             this.DataContext = serviceProvider.GetService<SongPageViewModel>();
@@ -44,7 +45,6 @@ namespace ChillMusicUWP.MVVM.View
                 ViewModel.PlaySong();
             }
             base.OnNavigatedTo(e);
-            this.InitializeComponent();
         }
 
         private void PlayPauseButton_Tapped(object sender, TappedRoutedEventArgs e)
@@ -68,6 +68,17 @@ namespace ChillMusicUWP.MVVM.View
             if (textBlock.Tag is Sound sound)
             {
                 ViewModel.AddEffect(sound);
+            }
+        }
+
+        private void volumeSlider_ValueChanged(object sender, RangeBaseValueChangedEventArgs e)
+        {
+            Slider slider = (Slider)sender;
+            string name = slider.Tag as string;
+            if (name != null)
+            {
+                double value = slider.Value/100;
+                ViewModel.SetVolume(name, value);
             }
         }
     }

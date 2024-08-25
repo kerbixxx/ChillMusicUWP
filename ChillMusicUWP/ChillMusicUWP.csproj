@@ -121,13 +121,11 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToImageConverter.cs" />
-    <Compile Include="Converters\SoundInfoConverter.cs" />
     <Compile Include="Data\Context\ApplicationDbContext.cs" />
     <Compile Include="Data\Repositories\IRepository.cs" />
     <Compile Include="Data\Repositories\SongRepository.cs" />
     <Compile Include="Data\Repositories\SoundRepository.cs" />
     <Compile Include="Interfaces\IPlaybackService.cs" />
-    <Compile Include="MVVM\Model\AudioInfo.cs" />
     <Compile Include="MVVM\Model\Song.cs" />
     <Compile Include="MVVM\Model\Sound.cs" />
     <Compile Include="MVVM\Model\SoundCategory.cs" />
